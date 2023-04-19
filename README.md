@@ -1,4 +1,14 @@
-- Role install dedcon server on Ubuntu 20.04
+- Role install dedcon server on Centos 7
+- Dockerfile contains dockerized environment for run play-book
 
-- Dockerfile contain dockerized server
+## Command to run
 
+ 1) docker build -t ansible-test:1 .
+ 2) docker run --rm -v $(pwd):/work ansible-test:1 ansible-playbook /work/deploy.yml
+ 
+## Note
+ 
+ You have to create playbook deploy.yml whith following content before run docker container: 
+    - hosts: localhost
+      roles:
+        - ansible-role-dedcon
