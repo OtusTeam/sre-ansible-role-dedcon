@@ -1,9 +1,17 @@
-FROM i386/debian:stable as build
-RUN apt update  && apt-get install -y wget bzip2
-RUN wget https://dedcon.simamo.de/bin/dedcon-i686-pc-linux-gnu-1.6.0.tar.bz2 && tar xvjf dedcon-i686-pc-linux-gnu-1.6.0.tar.bz2 -C /
+FROM centos:7
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
-FROM i386/debian:stable-slim 
-RUN mkdir /server
-WORKDIR /server
-COPY --from=build /dedcon-i686-pc-linux-gnu-1.6.0/dedcon /server/dedcon
-CMD ["/server/dedcon"]
+RUN yum check-update; \
+    yum install -y gcc libffi-devel python3 epel-release; \
+    yum install -y python3-pip; \
+    yum install -y wget; \
+    yum clean all
+
+RUN pip3 install --upgrade pip; \
+    pip3 install --upgrade virtualenv; \
+    pip3 install pywinrm[kerberos]; \
+    pip3 install pywinrm; \
+    pip3 install jmspath; \
+    pip3 install requests; \
+    python3 -m pip install ansible;

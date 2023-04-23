@@ -1,0 +1,10 @@
+---
+- name: Install dependencies
+  yum: name="{{item}}" update_cache=yes state=present
+  loop:
+    - glibc
+    - ncurses-libs
+    - libstdc++
+    - zlib
+    - tar
+    - bzip2
