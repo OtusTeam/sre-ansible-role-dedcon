@@ -1,14 +1,8 @@
 ---
-- name: Install dependencies
-  yum: name="{{item}}" update_cache=yes state=present
-  loop:
-    - glibc
-    - ncurses-libs
-    - libstdc++
-    - zlib
-    - tar
-    - bzip2
-
+- include_tasks: centos_dep_install.yml
+  when: ansible_facts['distribution']=="CentOS"
+- include_tasks: ubuntu_dep_install.yml.yml
+  when: ansible_facts['distribution']=="Ubuntu"
 - name: Download server tarball
   get_url:
     url: https://dedcon.simamo.de/bin/dedcon-i686-pc-linux-gnu-1.6.0.tar.bz2
