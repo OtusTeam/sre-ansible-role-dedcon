@@ -1,5 +1,5 @@
-- Role install dedcon server on Centos 7
-- Dockerfile contains dockerized environment for run play-book
+- Role install dedcon server on debian i386 and Centos 7
+- Dockerfile contains dockerized environment for run play-book on Centos 7
 
 ## Command to run
 
@@ -9,6 +9,8 @@
 ## Note
  
  You have to create playbook deploy.yml whith following content before run docker container: 
+    
+ ---------------------
     - hosts: localhost
       roles:
         - ansible-role-dedcon
