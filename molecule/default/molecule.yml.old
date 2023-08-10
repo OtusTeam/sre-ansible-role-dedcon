@@ -1,20 +1,14 @@
----
 dependency:
   name: galaxy
 driver:
   name: docker
-lint: |
-    yamllint .
+lint: yamllint
+#  name: yamllint
+#  options:
+#    config-file: molecule/default/yamllint.yml
 platforms:
-  - name: ansible-role-test-debian
+  - name: ansible-role-test
     image: "geerlingguy/docker-debian9-ansible"
-    command: ${MOLECULE_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
-  - name: ansible-role-test-centos
-    image: "geerlingguy/docker-centos7-ansible"
     command: ${MOLECULE_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
