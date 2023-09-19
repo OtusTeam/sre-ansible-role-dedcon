@@ -1,0 +1,13 @@
+dedcon_packages: "{{ lookup('vars', 'dedcon_' + ansible_os_family | lower + '_packages') }}"
+
+dedcon_debian_packages:
+  - libc6
+  - libncurses5
+  - libstdc++6
+  - zlib1g
+
+dedcon_redhat_packages:
+  - glibc-devel.i686
+  - ncurses-devel.i686
+  - libstdc++-devel.i686
+  - zlib-devel.i686
