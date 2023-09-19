@@ -1,8 +1,8 @@
 ---
-- name: Deploying on Debian
+- name: Deploying on Debian-based
   ansible.builtin.include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- name: Deploying on Centos
-  ansible.builtin.include_tasks: centos.yml
+- name: Deploying on RedHat-based
+  ansible.builtin.include_tasks: redhat.yml
   when: ansible_os_family == 'RedHat'

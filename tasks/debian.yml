@@ -6,36 +6,36 @@
     state: present
   loop: "{{ dedcon_packages }}"
 
-- name: Download server tarball
+- name: Download server tarball.
   get_url:
     url: http://dedcon.simamo.de/bin/dedcon-i686-pc-linux-gnu-1.6.0_svn1038.tar.bz2
     dest: /tmp/dedcon.tar.bz2
     mode: '0440'
 
-- name: Extract archive
+- name: Extract archive.
   unarchive:
     src: /tmp/dedcon.tar.bz2
     dest: /srv
-    remote_src: yes
+    remote_src: true
 
-- name: Create symbolic link 
+- name: Create symbolic link.
   file:
     src: "/srv/dedcon-i686-pc-linux-gnu-1.6.0_svn1038"
     dest: "/srv/dedcon"
     state: link
 
-- name: Create a login user
+- name: Create a login user.
   user:
     name: dedcon
     groups:
       - daemon
     state: present
     shell: /bin/nologin
-    system: no
-    createhome: yes
+    system: false
+    createhome: true
     home: /srv/dedcon
-    
-- name: create directories
+
+- name: Create directories.
   file:
     path: "{{ item }}"
     state: directory

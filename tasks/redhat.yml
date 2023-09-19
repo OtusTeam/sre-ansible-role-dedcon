@@ -1,11 +1,10 @@
 ---
----
 - name: Install RedHat dependencies
   ansible.builtin.yum:
     state: present
     update_cache: true
     name: "{{ item }}"
-  loop: 
+  loop:
     - "{{ dedcon_packages }}"
 
 - name: Download server tarball
