@@ -1,14 +1,23 @@
 dependency:
   name: galaxy
+role_name_check: 1
 driver:
   name: docker
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/default/yamllint.yml
+#lint:
+#  name: yamllint
+#  options:
+#    config-file: molecule/default/yamllint.yml
 platforms:
-  - name: ansible-role-test
-    image: "geerlingguy/docker-debian9-ansible"
+  - name: ansible-role-test-DEBIAN
+    #image: "geerlingguy/docker-debian9-ansible"
+    image: "geerlingguy/docker-ubuntu2004-ansible"
+    command: ${MOLECULE_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+  - name: ansible-role-test-RHEL
+    image: "geerlingguy/docker-rockylinux8-ansible"
     command: ${MOLECULE_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -31,5 +40,5 @@ scenario:
   name: default
 verifier:
   name: testinfra
-  lint:
-    name: flake8
+#  lint:
+#    name: flake8

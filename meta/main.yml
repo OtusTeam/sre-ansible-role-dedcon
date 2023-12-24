@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: ansible-role-{{cookiecutter.setup_name | lower | replace(' ', '_')}}
+  namespace: geerlingguy
   author: kevit
   description: This role install {{cookiecutter.setup_name}}
   company: White Horse LLC
