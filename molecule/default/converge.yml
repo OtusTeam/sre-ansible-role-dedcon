@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: localhost
+  tasks:
+    - name: "Include testko-role"
+      include_role:
+        name: "ansible-role-dedcon-main"
