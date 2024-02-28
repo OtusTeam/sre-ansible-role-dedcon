@@ -1,0 +1,15 @@
+---
+debian_packages:
+  - libc6
+  - libncurses5
+  - libstdc++6
+  - zlib1g
+
+redhat_packages:
+  - glibc-devel.i686
+  - ncurses-devel.i686
+  - libstdc++-devel.i686
+  - zlib-devel.i686
+  - bzip2
+  - unzip
+  - tar
