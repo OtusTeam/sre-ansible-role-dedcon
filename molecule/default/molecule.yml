@@ -1,17 +1,28 @@
 dependency:
   name: galaxy
+role_name_check: 1
 driver:
   name: docker
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/default/yamllint.yml
+#lint:
+#  name: yamllint
+#  options:
+#    config-file: molecule/default/yamllint.yml
 platforms:
-  - name: ansible-role-test
-    image: "geerlingguy/docker-debian9-ansible"
+  - name: ansible-role-test-debian
+    image: "geerlingguy/docker-ubuntu2004-ansible"
     command: ${MOLECULE_COMMAND:-""}
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    privileged: true
+    pre_build_image: true
+
+  - name: ansible-role-test-redhat
+    image: "geerlingguy/docker-centos8-ansible"
+    command: ${MOLECULE_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
     privileged: true
     pre_build_image: true
 provisioner:
@@ -20,16 +31,14 @@ provisioner:
     name: ansible-lint
     options:
       exclude:
-        - molecule/default/playbook.yml
+        - molecule/default/converge.yml
       x:
         - 204  # Lines should be no longer than 160 chars
         - 403  # Package installs should not use latest
         - 502  # All tasks should be named
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
 scenario:
   name: default
 verifier:
   name: testinfra
-  lint:
-    name: flake8
+#  lint:
+#    name: flake8  
